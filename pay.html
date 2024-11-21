@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Delight - Payment</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/pay.css">
+</head>
+<body>
+
+<div class="modal clearfix">
+    <div class="modal-product">
+        <div class="product">
+
+            <!-- Slideshow container -->
+            <div class="product-slideshow">
+
+                <!-- Full-width images with number and caption text -->
+                <div class="productSlides fade">
+                    <img src="image/Beans.png" alt="Cafe Delight Item 1" style="width:100%">
+                </div>
+
+                <div class="productSlides fade">
+                    <img src="image/home-img-1.png" alt="Cafe Delight Item 2" style="width:100%">
+                </div>
+
+                <div class="productSlides fade">
+                    <img src="image/home-img-2.png" alt="Cafe Delight Item 3" style="width:100%">
+                </div>
+
+                <div class="productSlides fade">
+                    <img src="image/home-img-3.png" alt="Cafe Delight Item 4" style="width:100%">
+                </div>
+
+                <div class="productSlides fade">
+                    <img src="image/Beans.png" alt="Cafe Delight Item 5" style="width:100%">
+                </div>
+
+                <br>
+
+                <!-- The dots/circles -->
+                <div style="text-align:center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                    <span class="dot" onclick="currentSlide(4)"></span>
+                    <span class="dot" onclick="currentSlide(5)"></span>
+                </div>
+
+            </div>
+
+            <h1 class="product-name">
+                Cafe Delight Special Item
+            </h1>
+            <p class="product-code-name">
+                 Code: CAFE123
+            </p>
+            <p class="product-price">
+                
+            </p>
+
+        </div>
+
+        <div class="round-shape"></div>
+    </div>
+    <div class="modal-info">
+        <div class="info">
+            <h2>Payment Information</h2>
+            <form action="thank.html">
+                <ul class="form-list">
+                    <li class="form-list-row">
+                        <div class="user">
+                            <label for="">Name</label><br>
+                            <i class="fas fa-user"></i><input type="text" placeholder="Enter your name" required >
+                        </div>
+                    </li>
+                    <li class="form-list-row">
+                        <div class="number">
+                            <label for="">Card Number</label><br>
+                            <i class="far fa-credit-card"></i><input type="text" placeholder="1234 5678 9012 3456" required >
+                        </div>
+                    </li>
+                    <li class="form-list-row clearfix">
+                        <div class="date">
+                            <label for="">Expiration Date</label><br>
+                            <input class="month" type="text"  placeholder="MM">
+                            <input class="year" type="text"  placeholder="YY">
+                        </div>
+                        <div class="cvc">
+                            <label for="">CVC</label><i class="fas fa-question-circle"></i><br>
+                            <input type="text"  placeholder="123">
+                        </div>
+                    </li>
+                    <li class="form-list-row">
+                        <div class="checkbox">
+                            <label for="checkbox">
+                                <input id="checkbox" type="checkbox">
+                                <span>Remember My Information</span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <button>Pay Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+   // Slideshow functionality
+let slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  const slides = document.getElementsByClassName("productSlides");
+  const dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = slides.length;
+  }
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (let i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].className += " active";
+}
+
+// Payment button functionality
+function processPayment() {
+  const selectedProduct = document.querySelector(".productSlides[style*='block']").dataset.productName;
+  const price = document.querySelector(".productSlides[style*='block']").dataset.productPrice;
+
+  if (confirm(`You have selected ${selectedProduct} for ₹${price}. Proceed to payment?`)) {
+    alert("Redirecting to payment gateway...");
+    // Redirect to payment gateway or complete the payment process here
+    window.location.href = "payment_gateway_url"; // Replace with actual payment gateway URL
+  } else {
+    alert("Payment canceled.");
+  }
+}
+
+</script>
+
+</body>
+</html>
